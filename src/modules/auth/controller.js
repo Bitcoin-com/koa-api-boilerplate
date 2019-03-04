@@ -62,7 +62,7 @@ async function authUser (ctx, next) {
 
   const domain = 'auth.bchtest.net'
   const path = '/auth'
-  const cashid = CashID(domain, path)
+  const cashid = new CashID(domain, path)
   const parsed = cashid.validateRequest(ctx.request.body)
   console.log(`parsed: ${util.inspect(parsed)}`)
 
