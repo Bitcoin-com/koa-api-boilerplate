@@ -39,7 +39,13 @@ const User = require('../../models/users')
  *     }
  */
 async function createUser (ctx) {
-  const user = new User(ctx.request.body.user)
+  const userData = ctx.request.body.user
+  console.log(`user: ${JSON.stringify(userData, null, 2)}`)
+
+  const user = new User(userData)
+
+  console.log(`new user: ${JSON.stringify(user, null, 2)}`)
+
   try {
     await user.save()
   } catch (err) {

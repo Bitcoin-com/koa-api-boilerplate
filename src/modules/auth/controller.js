@@ -1,5 +1,9 @@
 const passport = require('koa-passport')
 
+// Used for debugging and iterrogating JS objects.
+const util = require('util')
+util.inspect.defaultOptions = { depth: 5 }
+
 /**
  * @apiDefine TokenError
  * @apiError Unauthorized Invalid JWT token
@@ -51,6 +55,8 @@ const passport = require('koa-passport')
  */
 
 async function authUser (ctx, next) {
+  console.log(`ctx.request: ${util.inspect(ctx.request)}`)
+
   return passport.authenticate('local', (err, user, info, status) => {
     if (err) throw err
 
