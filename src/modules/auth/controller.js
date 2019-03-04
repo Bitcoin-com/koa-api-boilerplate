@@ -56,6 +56,8 @@ util.inspect.defaultOptions = { depth: 5 }
 
 async function authUser (ctx, next) {
   console.log(`ctx.request: ${util.inspect(ctx.request)}`)
+  console.log(`ctx.request.body: ${util.inspect(ctx.request.body)}`)
+  console.log(`ctx.request.query: ${util.inspect(ctx.request.query)}`)
 
   return passport.authenticate('local', (err, user, info, status) => {
     if (err) throw err
