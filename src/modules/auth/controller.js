@@ -1,4 +1,5 @@
 const passport = require('koa-passport')
+const CashID = require('cashid')
 
 // Used for debugging and iterrogating JS objects.
 const util = require('util')
@@ -58,6 +59,12 @@ async function authUser (ctx, next) {
   console.log(`ctx.request: ${util.inspect(ctx.request)}`)
   console.log(`ctx.request.body: ${util.inspect(ctx.request.body)}`)
   console.log(`ctx.request.query: ${util.inspect(ctx.request.query)}`)
+
+  const domain = 'auth.bchtest.net'
+  const path = '/auth'
+  const cashid = CashID(domain, path)
+  const parsed = cashid.validateRequest(ctx.request.body)
+  console.log(`parsed: ${util.inspect(parsed)}`)
 
   return passport.authenticate('local', (err, user, info, status) => {
     if (err) throw err
